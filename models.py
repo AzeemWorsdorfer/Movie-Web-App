@@ -15,8 +15,6 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False, unique=True)
 
-    # Relationship to Movie: user.movies will return a list of Movie objects
-    # 'backref' creates a .user attribute on the Movie object to access the parent
     movies = db.relationship('Movie', backref='user', lazy='dynamic')
 
     def __repr__(self):
