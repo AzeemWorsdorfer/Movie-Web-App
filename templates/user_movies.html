@@ -3,44 +3,56 @@
 {% block title %}{{ user.name }}'s Movies{% endblock %}
 
 {% block content %}
-    <p><a href="{{ url_for('home') }}">← Back to User Selection</a></p>
-    <h1>🎬 {{ user.name }}'s Favorite Movies</h1>
-    
-    <hr>
-    <h2>Add a New Movie</h2>
-    <form method="POST" action="{{ url_for('user_movies', user_id=user.id) }}">
-        <label for="movie_title">Movie Title:</label>
-        <input type="text" id="movie_title" name="movie_title" required placeholder="e.g., Inception">
-        <button type="submit">Search & Add Movie</button>
-    </form>
-    <hr>
-{% if movies %}
-    <div class="movie-list-grid">
-        {% for movie in movies %}
-        <div class="movie-card">
-            <img src="{{ movie.poster_url }}" alt="{{ movie.name }} Poster" class="movie-poster">
-            
-            <div class="movie-details">
-                <h3>{{ movie.name }}</h3>
-                <p>({{ movie.year }})</p>
-                <p><strong>Director:</strong> {{ movie.director }}</p>
-            </div>
+    <p class="mb-4">
+        <a href="{{ url_for('home') }}" class="btn btn-sm btn-outline-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Back to User Selection
+        </a>
+    </p>
 
-            <div class="movie-actions">
-                <form method="POST" action="{{ url_for('update_movie', user_id=user.id, movie_id=movie.id) }}">
-                    <input type="text" name="new_title" required placeholder="New Title">
-                    <button type="submit">Update Title</button>
-                </form>
+    <h1 class="mb-4">🎬 {{ user.name }}'s Favorite Movies</h1>
+    
+    <div class="card shadow-sm mb-5 p-4">
+        <h2 class="card-title mb-3">Add a New Movie</h2>
+        <form method="POST" action="{{ url_for('user_movies', user_id=user.id) }}" class="input-group">
+            <input type="text" id="movie_title" name="movie_title" class="form-control" required placeholder="Movie Title (e.g., Inception)">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-search me-1"></i> Search & Add Movie
+            </button>
+        </form>
+    </div>
+
+    {% if movies %}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for movie in movies %}
+        <div class="col">
+            <div class="card h-100 shadow-sm movie-card">
+                <img src="{{ movie.poster_url }}" class="card-img-top movie-poster" alt="{{ movie.name }} Poster">
                 
-                <form method="POST" action="{{ url_for('delete_movie', user_id=user.id, movie_id=movie.id) }}">
-                    <button type="submit">Delete Movie</button>
-                </form>
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ movie.name }}</h5>
+                    <p class="card-text text-muted">({{ movie.year }}) - {{ movie.director }}</p>
+
+                    <div class="d-grid gap-2 mt-3">
+                        <form method="POST" action="{{ url_for('update_movie', user_id=user.id, movie_id=movie.id) }}" class="input-group input-group-sm mb-2">
+                            <input type="text" name="new_title" class="form-control" required placeholder="New Title">
+                            <button type="submit" class="btn btn-outline-info">Update</button>
+                        </form>
+                        
+                        <form method="POST" action="{{ url_for('delete_movie', user_id=user.id, movie_id=movie.id) }}">
+                            <button type="submit" class="btn btn-sm btn-danger w-100">
+                                <i class="fas fa-trash-alt me-1"></i> Delete Movie
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
         {% endfor %}
     </div>
     {% else %}
-    <p>{{ user.name }} hasn't added any favorite movies yet.</p>
+    <div class="alert alert-info mt-4">
+        {{ user.name }} hasn't added any favorite movies yet.
+    </div>
     {% endif %}
 
 {% endblock %}
