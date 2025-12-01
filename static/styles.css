@@ -10,8 +10,8 @@ body {
 
 /* Container for main content */
 main.container {
-    width: 90%;
-    max-width: 1100px; /* Limit max width for large screens */
+    width: 95%; 
+    max-width: 1400px; 
     margin: 30px auto;
     padding: 25px;
     background: #fff;
@@ -23,34 +23,42 @@ main.container {
 header {
     background-color: #0056b3; /* Deep blue banner */
     color: white;
-    padding: 15px 0;
-    text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* NEW: Use flexbox to align content */
+    display: flex; 
+    justify-content: space-between; /* Push title and nav links apart */
+    align-items: center;
+    padding: 10px 30px; /* Add padding to sides */
 }
 
 header h1 {
-    margin: 0 0 5px 0;
-    padding: 0 20px;
-    font-size: 2em;
-    font-weight: 300;
+    margin: 0;
+    font-size: 1.8em; /* Slightly smaller title */
+    font-weight: 400;
 }
 
-/* Navigation Links (Home Button in Banner) */
+/* Navigation Links (Home Button) */
 nav {
-    background-color: #003d80; /* Slightly darker strip for nav */
-    padding: 8px 0;
+    /* No separate background, just flex alignment */
+    padding: 0;
+    display: flex;
+    align-items: center;
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    padding: 5px 15px;
+    padding: 8px 15px; /* Increase padding for a clickable area */
     border-radius: 4px;
     transition: background-color 0.3s;
+    font-weight: normal;
+    /* NEW: Add a subtle border to make it stand out as a button */
+    border: 1px solid rgba(255, 255, 255, 0.3); 
 }
 
 nav a:hover {
     background-color: #007bff;
+    border-color: white;
 }
 
 /* Forms (Create User, Add Movie) */
@@ -60,7 +68,7 @@ form {
     border: 1px solid #dcdcdc;
     background-color: #f8f8f8;
     border-radius: 6px;
-    display: flex; /* Use flex for clean inline form elements */
+    display: flex; 
     gap: 10px;
     align-items: center;
 }
@@ -69,7 +77,7 @@ input[type="text"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    flex-grow: 1; /* Input takes up available space */
+    flex-grow: 1; 
 }
 
 button {
