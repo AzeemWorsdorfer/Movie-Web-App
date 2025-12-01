@@ -1,65 +1,86 @@
 /* Basic Reset and Typography */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #eef2f7; /* Lighter, subtle background */
     color: #333;
 }
 
 /* Container for main content */
 main.container {
-    width: 80%;
-    margin: 20px auto;
-    padding: 20px;
+    width: 90%;
+    max-width: 1100px; /* Limit max width for large screens */
+    margin: 30px auto;
+    padding: 25px;
     background: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Header and Navigation */
+/* Header and Navigation (Banner Style) */
 header {
-    background-color: #007bff;
+    background-color: #0056b3; /* Deep blue banner */
     color: white;
-    padding: 10px 0;
+    padding: 15px 0;
     text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 header h1 {
-    margin: 0 0 10px 0;
+    margin: 0 0 5px 0;
     padding: 0 20px;
+    font-size: 2em;
+    font-weight: 300;
+}
+
+/* Navigation Links (Home Button in Banner) */
+nav {
+    background-color: #003d80; /* Slightly darker strip for nav */
+    padding: 8px 0;
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
-/* Forms */
+nav a:hover {
+    background-color: #007bff;
+}
+
+/* Forms (Create User, Add Movie) */
 form {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ccc;
-    background-color: #fafafa;
+    margin-bottom: 25px;
+    padding: 20px;
+    border: 1px solid #dcdcdc;
+    background-color: #f8f8f8;
+    border-radius: 6px;
+    display: flex; /* Use flex for clean inline form elements */
+    gap: 10px;
+    align-items: center;
 }
 
 input[type="text"] {
-    padding: 8px;
-    margin-right: 10px;
-    border: 1px solid #ddd;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    width: 200px;
+    flex-grow: 1; /* Input takes up available space */
 }
 
 button {
-    padding: 8px 15px;
+    padding: 10px 18px;
     background-color: #28a745;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
 }
 
 button:hover {
@@ -73,34 +94,91 @@ ul {
 }
 
 ul li {
-    background: #e9ecef;
-    margin-bottom: 8px;
-    padding: 10px;
-    border-radius: 4px;
+    background: #e6f0ff; /* Light blue background for users */
+    margin-bottom: 10px;
+    padding: 12px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 ul li a {
     text-decoration: none;
-    color: #007bff;
+    color: #0056b3;
     font-weight: bold;
+    font-size: 1.1em;
 }
 
-/* Movie Card Layout (User Movies Page) */
-div[style*="display: flex"] { /* Targeting the inline style we used in the template */
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 20px;
+/* --- Movie List Layout (The key improvement) --- */
+
+.movie-list-grid {
+    display: flex;
+    flex-wrap: wrap; /* Allows movies to wrap to the next line */
+    gap: 20px; /* Space between movie cards */
+    padding-top: 10px;
+}
+
+/* Movie Card Style */
+.movie-card {
     background-color: white;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    align-items: flex-start !important; /* Override inline style for better alignment */
-    gap: 20px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: calc(33.333% - 20px); /* 3 cards per row on wider screens (adjusting for gap) */
+    display: flex;
+    flex-direction: column; /* Stacks poster and details vertically */
+    align-items: center;
+    transition: transform 0.2s;
 }
 
-img {
+.movie-card:hover {
+    transform: translateY(-5px); /* Subtle lift effect on hover */
+}
+
+.movie-poster {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
     border-radius: 4px;
-    /* Maintain dimensions used in template */
-    width: 100px; 
-    height: 150px;
+    margin-bottom: 15px;
     object-fit: cover;
+}
+
+.movie-details {
+    text-align: center;
+    width: 100%;
+}
+
+.movie-details h3 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* Action Forms within the card (Update/Delete) */
+.movie-actions {
+    margin-top: 15px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.movie-actions form {
+    display: block;
+    padding: 5px 0;
+    margin-bottom: 5px;
+    border: none;
+    background: none;
+    gap: 5px;
+}
+
+/* Specific button style for delete */
+.movie-actions button {
+    background-color: #dc3545; /* Red for delete button */
+    padding: 8px 12px;
+}
+
+.movie-actions button:hover {
+    background-color: #c82333;
 }

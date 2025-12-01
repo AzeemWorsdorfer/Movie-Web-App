@@ -14,22 +14,25 @@
         <button type="submit">Search & Add Movie</button>
     </form>
     <hr>
-
-    {% if movies %}
-    <div>
+{% if movies %}
+    <div class="movie-list-grid">
         {% for movie in movies %}
-        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 15px; display: flex; align-items: center; gap: 20px;">
-            <img src="{{ movie.poster_url }}" alt="{{ movie.name }} Poster" style="width: 100px; height: 150px; object-fit: cover;">
-            <div>
-                <h3>{{ movie.name }} ({{ movie.year }})</h3>
+        <div class="movie-card">
+            <img src="{{ movie.poster_url }}" alt="{{ movie.name }} Poster" class="movie-poster">
+            
+            <div class="movie-details">
+                <h3>{{ movie.name }}</h3>
+                <p>({{ movie.year }})</p>
                 <p><strong>Director:</strong> {{ movie.director }}</p>
+            </div>
 
-                <form method="POST" action="{{ url_for('update_movie', user_id=user.id, movie_id=movie.id) }}" style="display: inline;">
+            <div class="movie-actions">
+                <form method="POST" action="{{ url_for('update_movie', user_id=user.id, movie_id=movie.id) }}">
                     <input type="text" name="new_title" required placeholder="New Title">
                     <button type="submit">Update Title</button>
                 </form>
                 
-                <form method="POST" action="{{ url_for('delete_movie', user_id=user.id, movie_id=movie.id) }}" style="display: inline; margin-left: 10px;">
+                <form method="POST" action="{{ url_for('delete_movie', user_id=user.id, movie_id=movie.id) }}">
                     <button type="submit">Delete Movie</button>
                 </form>
             </div>
