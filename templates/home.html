@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>MoviWeb App - Home</title>
-</head>
-<body>
-    <h1>🎬 MoviWeb App</h1>
+{% extends "base.html" %}
+
+{% block title %}User Selection{% endblock %}
+
+{% block content %}
     <h2>Select a User:</h2>
     
     {% if users %}
@@ -13,7 +10,7 @@
         {% for user in users %}
         <li>
             <a href="{{ url_for('user_movies', user_id=user.id) }}">
-                {{ user.name }} (ID: {{ user.id }})
+                **{{ user.name }}** (ID: {{ user.id }})
             </a>
         </li>
         {% endfor %}
@@ -30,5 +27,4 @@
         <input type="text" id="user_name" name="user_name" required>
         <button type="submit">Add User</button>
     </form>
-</body>
-</html>
+{% endblock %}
