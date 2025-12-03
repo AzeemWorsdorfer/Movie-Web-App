@@ -1,4 +1,4 @@
-# 🎬 MoviWeb Application
+# 🎬 MovieWeb Application
 
 ## Project Overview
 
